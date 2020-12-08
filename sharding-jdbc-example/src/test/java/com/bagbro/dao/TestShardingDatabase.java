@@ -4,9 +4,11 @@ import com.bagbro.ShardingBootApplication;
 import com.bagbro.entity.BOrder;
 import com.bagbro.entity.Position;
 import com.bagbro.entity.PositionDetail;
+import com.bagbro.entity.Student;
 import com.bagbro.repository.BOrderRepository;
 import com.bagbro.repository.PositionDetailRepository;
 import com.bagbro.repository.PositionRepository;
+import com.bagbro.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +37,22 @@ public class TestShardingDatabase {
     private PositionDetailRepository positionDetailRepository;
     @Resource
     private BOrderRepository bOrderRepository;
+    @Resource
+    private StudentRepository studentRepository;
+
+    @Test
+    public void testQueryStudent(){
+        Optional<Student> optional = studentRepository.findById(4L);
+        Student student = optional.get();
+        log.info("student:{}", student);
+    }
+
+    @Test
+    public void testSaveStudent(){
+        Student student = new Student();
+        student.setName("亚索");
+        studentRepository.save(student);
+    }
 
     @Test
     @Repeat(100)
