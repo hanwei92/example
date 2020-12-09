@@ -10,6 +10,7 @@ import com.bagbro.repository.PositionDetailRepository;
 import com.bagbro.repository.PositionRepository;
 import com.bagbro.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shardingsphere.api.hint.HintManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,9 +43,13 @@ public class TestShardingDatabase {
 
     @Test
     public void testQueryStudent(){
+        //强制路由
+        HintManager hintManager = HintManager.getInstance();
+        hintManager.setMasterRouteOnly();
         Optional<Student> optional = studentRepository.findById(4L);
         Student student = optional.get();
         log.info("student:{}", student);
+        hintManager.close();
     }
 
     @Test
