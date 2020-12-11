@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>sharding-jdbc-example</module>
+        <module>leetcode-example</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
